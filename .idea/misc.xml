@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/192102211_Yudi_Muttaqin/app/src/main/res/layout/activity_add_mahasiswa.xml" value="0.19010416666666666" />
         <entry key="..\:/Android/192102211_Yudi_Muttaqin/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
-        <entry key="..\:/Android/192102211_Yudi_Muttaqin/app/src/main/res/layout/list_mahasiswa.xml" value="0.17074275362318841" />
+        <entry key="..\:/Android/192102211_Yudi_Muttaqin/app/src/main/res/layout/list_mahasiswa.xml" value="0.1" />
       </map>
     </option>
   </component>
