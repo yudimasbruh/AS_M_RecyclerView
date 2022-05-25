@@ -1,5 +1,6 @@
 package com.example.recyclerviewb;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,29 +12,30 @@ import java.util.List;
 import java.util.Locale;
 
 public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaViewHolder> {
-   private List<MahasiswaModel> _mahasiswaModelList;
+    private List<MahasiswaModel> _mahasiswaModelList;
 
-   public MahasiswaAdapter(List<MahasiswaModel> mahasiswaModelList)
-   {
-       this._mahasiswaModelList = mahasiswaModelList;
-   }
+    public MahasiswaAdapter(List<MahasiswaModel> mahasiswaModelList){
+        this._mahasiswaModelList = mahasiswaModelList;
+    }
 
     @NonNull
     @Override
-    public MahasiswaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+    public  MahasiswaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int ViewType){
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.list_mahasiswa, parent, false);
         return new MahasiswaViewHolder(v);
     }
 
+    public void onBindViewHolder(@NonNull MahasiswaModel holder, int position) {
+
+    }
     @Override
-    public void onBindViewHolder(@NonNull MahasiswaViewHolder holder, int position) {
-    MahasiswaModel mm = _mahasiswaModelList.get(position);
+    public  void onBindViewHolder(@NonNull MahasiswaViewHolder holder, int position){
+        MahasiswaModel mm = _mahasiswaModelList.get(position);
+        holder._jkImageView.setImageResource(R.drawable.boy);
 
-    holder._jkImageView.setImageResource(R.drawable.boy);
-
-    if (mm.getJenisKelamin().toLowerCase().equals("perempuan"));
-        {
+        if(mm.getJenisKelamin().toLowerCase().equals("perempuan")){
             holder._jkImageView.setImageResource(R.drawable.girl);
         }
 
@@ -42,16 +44,14 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaViewHolder> 
         holder._jkTextView.setText(mm.getJenisKelamin());
 
         String jp = mm.getJP();
-        jp = jp.substring(0, 2); //hanya mengambil 2 karakter depan
+        jp = jp.substring(0,2);
         holder._jpTextView.setText(jp);
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         int count = 0;
-
-        if (_mahasiswaModelList != null)
-        {
+        if(_mahasiswaModelList != null){
             count = _mahasiswaModelList.size();
         }
         return count;

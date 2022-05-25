@@ -22,55 +22,41 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton _addButton;
-    private RecyclerView _recyclerView1;
+    private RecyclerView _rycleView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        _recyclerView1 = (RecyclerView) findViewById(R.id.recyclerView1);
+        _rycleView1 = (RecyclerView) findViewById(R.id.recyclerView1);
 
+        initAddButton();
+    }
+
+    public void loadRecycleView(){
         AsyncHttpClient ahc = new AsyncHttpClient();
-        String url = "https://stmikpontianak.net/011100862/tampilMahasiswa.php";
+        String url = "https://tonywijaya.000webhostapp.com/011100862/tampilMahasiswa.php";
 
         ahc.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Gson g = new Gson();
                 List<MahasiswaModel> mahasiswaModelList = g.fromJson(new String(responseBody), new TypeToken<List<MahasiswaModel>>(){}.getType());
-
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(MainActivity.this);
-                _recyclerView1.setLayoutManager(lm);
+                _rycleView1.setLayoutManager(lm);
 
                 MahasiswaAdapter ma = new MahasiswaAdapter(mahasiswaModelList);
-                _recyclerView1.setAdapter(ma);
+                _rycleView1.setAdapter(ma);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        initAddButton();
-        loadRecyclerView();
     }
-    private void loadRecyclerView() {
-        AsyncHttpClient ahc = new AsyncHttpClient();
-        String url = "https://stmikpontianak.net/011100862/tampilMahasiswa.php";
 
-        ahc.get(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        })
-    }
     private void initAddButton() {
         _addButton = findViewById(R.id.addButton);
 
@@ -79,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddMahasiswaActivity.class);
                 startActivity(intent);
-
-
+                loadRecycleView();
             }
         });
     }
