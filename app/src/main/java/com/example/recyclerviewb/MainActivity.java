@@ -22,6 +22,7 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton _addButton;
+    private FloatingActionButton _refreshButton;
     private RecyclerView _rycleView1;
 
     @Override
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         _rycleView1 = (RecyclerView) findViewById(R.id.recyclerView1);
 
+        initRefreshButton();
         initAddButton();
     }
 
@@ -53,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void initRefreshButton() {
+         _refreshButton= findViewById(R.id.refreshButton);
+
+        _refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadRecycleView();
             }
         });
     }
